@@ -9,7 +9,7 @@ services:
     healthCheckPath: /
     envVars:
       - key: PORT
-        value: "3000"
+        value: "8080"
       - key: SEARXNG_URL
         value: http://mining-prospector-search:8080
 
