@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: mining-prospector
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: "3000"
+      - key: SEARXNG_URL
+        value: http://mining-prospector-search:8080
+
+  - type: pserv
+    name: mining-prospector-search
+    runtime: docker
+    plan: starter
+    region: frankfurt
+    dockerfilePath: ./searxng/Dockerfile
+    dockerContext: ./searxng
+    envVars:
+      - key: SEARXNG_BASE_URL
+        value: http://mining-prospector-search:8080/
+      - key: INSTANCE_NAME
+        value: Mining Prospector Search
